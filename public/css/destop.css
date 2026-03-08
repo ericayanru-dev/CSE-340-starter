@@ -1,0 +1,34 @@
+:root {
+    --color-text-primary: #1f2936;
+    --color-text-secondary:#01b4f5;
+    --color-text-placeholder: #789EAE;
+    --color-bg-primary: #f9fafb;
+    --color-bg-secondary: #ECECFD;
+    --color-bg-sidebar: #ffffff;
+    --color-border-hr: #E2E8F0;
+    --color-hover-primary: #695CFE;
+    --color-hover-secondary: #e2e2fb;
+    --color-shadow: rgba(252, 215, 215, 0.1);
+}
+
+@media (min-width: 768px){
+    body {
+        background: url("/images/site/checkerboard.jpg");
+        background-size: cover;
+        background-size: cover;
+    }
+
+
+    .wrapper {
+        background-color: var(--color-bg-primary);
+        margin: 2% 10%;
+        border-radius: .5rem;
+        border: #01b4f5 solid .3rem;
+        padding: .5rem;
+    }
+
+    .layer {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
