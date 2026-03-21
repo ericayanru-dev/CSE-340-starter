@@ -30,7 +30,7 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
-    grid = '<ul id="inv-display">'
+    grid = '<ul id="inv-display" class="inv-display">'
     data.forEach(vehicle => { 
       grid += '<li>'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
@@ -57,6 +57,27 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+Util.buildItemDetailPage = async function (data) {
+  if (data) {
+    return`
+    <div class= vehicle-detail>
+    <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
+    
+    <article class="vehicle-info">
+    <h2>${data.inv_make} ${data.inv_model} Detail</h2>
+    <span class="detail-style"><strong>Price:</strong> $${Number(data.inv_price).toLocaleString()}</span>
+    <p><strong>Description:</strong> ${data.inv_description}</p>
+    <span class="detail-style"><strong>color:</strong> ${data.inv_color}</span>
+    <p><strong>Mileage:</strong> ${Number(data.inv_miles).toLocaleString()} miles</p>
+    </article>
+    </div>`
+  }
+  else { 
+    return'<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+
+  
+}
 
 /* ****************************************
  * Middleware For Handling Errors

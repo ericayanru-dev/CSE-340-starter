@@ -21,7 +21,9 @@
     --color-hover-secondary: #e2e2fb;
     --color-shadow: rgb(0, 0, 0);
 }
-
+ a {
+  text-decoration: none;
+ }
 .top-header {
   display: flex;
   flex-direction: row;
@@ -32,7 +34,6 @@
 
 #top-header .siteName a{
   font-size: x-large;
-  text-decoration: none;
   font-weight:600;
   color: var(--color-text-primary);
 }
@@ -51,6 +52,10 @@
   color: var(--color-bg-primary);
   background: var(--color-text-primary);
   padding: 1rem;
+}
+
+.nav-bar ul a:visited {
+    color: var(--color-bg-sidebar); /* Color after being clicked/visited */
 }
 
 .nav-bar {
@@ -115,4 +120,45 @@
 .upgrade aside article img {
   background: var(--color-text-secondary);
   padding: 2rem;
+}
+
+/** .vehicle-classification**/
+.inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  list-style-type: none;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inv-display li {
+  padding: 1rem;
+  background: var(--color-bg-primary);
+  border: solid 2px var(--color-text-primary);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  text-align: center;
+}
+
+.inv-display li img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+
+/** .vehicle-detail**/
+.vehicle-detail {
+  display: grid;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.vehicle-info {
+  padding-top: 1rem;
+}
+
+.vehicle-info .detail-style {
+  display: block;
+  margin: 1rem 0;
+  background: var(--color-bg-secondary);
 }

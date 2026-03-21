@@ -30,5 +30,18 @@
     .layer {
         grid-template-columns: 1fr 1fr;
     }
-
+    
+    /** .vehicle-classification**/
+    .inv-display {
+    grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    /** .vehicle-detail**/
+    .vehicle-detail {
+        max-height: 100%;
+        margin: 0;
+        padding: 1rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
 }

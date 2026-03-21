@@ -19,6 +19,26 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
+invCont.buildByInventoryId = async function (req, res, next) {
+  try {
+    const inventorty_Id = req.params.inventortyId
+    const data = await invModel.getInventoryItemByInventoryID(inventorty_Id)
+    console.log(data)
+    const nav = await utilities.getNav()
+    const view = await utilities.buildItemDetailPage(data)
+    res.render("inventory/detail", {
+      title: `${data.inv_year} ${data.inv_make} ${data.inv_model}`,
+      nav,
+      view
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+invCont.triggerError = async function (req, res) {
+  throw new Error("Intentional Server Error")
+}
 
 module.exports = invCont
 
