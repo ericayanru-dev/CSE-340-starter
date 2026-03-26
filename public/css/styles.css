@@ -162,3 +162,61 @@
   margin: 1rem 0;
   background: var(--color-bg-secondary);
 }
+
+/** loging page **/
+.loginForm {
+  background: var(--color-bg-primary);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow:var(--color-shadow);
+  width: auto;
+}
+
+ input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-border-hr);
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: var(--color-hover-primary);
+  color: var(--color-text-primary);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.login p {
+  display: block;
+  text-align: center;
+  margin: 1rem;
+  padding: .5rem;
+} 
+
+/** register Form **/
+.registration-criterials {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+input:required:invalid, input:focus:invalid {
+ background-image: url(/images/invalid.png);
+ background-position: right top;
+ background-repeat: no-repeat;
+}
+ input:required:valid {
+ background-image: url(/images/valid.png);
+ background-position: right top;
+ background-repeat: no-repeat;
+ }

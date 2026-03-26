@@ -6,7 +6,6 @@ const utilities = require("../utilities/index")
 // Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 router.get("/detail/:inventortyId", utilities.handleErrors(invController.buildByInventoryId))
-router.get("/error", utilities.handleErrors(invController.triggerError)
-)
+router.get("/error", utilities.handleErrors(invController.triggerError))
 
 module.exports = router;

@@ -74,10 +74,67 @@ Util.buildItemDetailPage = async function (data) {
   }
   else { 
     return'<p class="notice">Sorry, no matching vehicles could be found.</p>'
-  }
-
-  
+  }  
 }
+
+Util.loginPage = async function () {
+ return `<div class="login"<form id="loginForm" class="loginForm">
+        <input name="account_email" type="email" id="email" placeholder="Enter your email" required>
+        <input name="account_password" type="password" id="password" placeholder="Enter your password" required>
+
+        <button type="submit">Login</button>
+        </form>
+        <p>No account? <a href="/account/register/" title="sign up">Sign up</a> </p>
+        </div>`
+}
+
+Util.buildErrorList = async function (errors) {
+  if (errors) {
+
+    let html = '<ul class="notice">'
+
+    errors.array().forEach(error => {
+      html += `<li>${error.msg}</li>`
+    })
+
+    html += "</ul>"
+
+    return html
+  }
+}
+
+Util.registerPage = async function () {
+  return `
+  <form id="registerForm" class="registerForm" action="/account/register" method="post">
+
+  <label for="firstname">First Name</label>
+  <input type="text" id="firstname" name="account_firstname" required>
+
+  <label for="lastname">Last Name</label>
+  <input type="text" id="lastname" name="account_lastname" required>
+
+  <label for="email">Email Address</label>
+  <input type="email" id="email" name="account_email" required>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="account_password" required
+  pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+
+  <button type="submit">Register</button>
+
+  </form>
+  <div class="registration-criterials">
+  <p>all the inputs are required and that the password must be:</p>
+    <ul>
+    <li>12 characters in length, minimum</li>
+    <li>contain at least 1 capital letter</li>
+    <li>contain at least 1 number</li>
+    <li>contain at least 1 special character</li>
+    </ul>
+  </div>
+  `
+}
+
 
 /* ****************************************
  * Middleware For Handling Errors
