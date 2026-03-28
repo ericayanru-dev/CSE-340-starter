@@ -6,6 +6,11 @@ const Util = {}
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
+  if (!data || data.length === 0) {
+    return `<p class="notice">
+      No vehicles are currently available in this classification.
+    </p>`
+  }
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
@@ -78,7 +83,8 @@ Util.buildItemDetailPage = async function (data) {
 }
 
 Util.loginPage = async function () {
- return `<div class="login"<form id="loginForm" class="loginForm">
+  return `<div class="login">
+        <form id="loginForm" class="loginForm" action="/account/login" method="post">
         <input name="account_email" type="email" id="email" placeholder="Enter your email" required>
         <input name="account_password" type="password" id="password" placeholder="Enter your password" required>
 
@@ -108,7 +114,7 @@ Util.registerPage = async function () {
   <form id="registerForm" class="registerForm" action="/account/register" method="post">
 
   <label for="firstname">First Name</label>
-  <input type="text" id="firstname" name="account_firstname" required>
+  <input type="text" id="firstname" name="account_firstname" required >
 
   <label for="lastname">Last Name</label>
   <input type="text" id="lastname" name="account_lastname" required>
@@ -133,6 +139,31 @@ Util.registerPage = async function () {
     </ul>
   </div>
   `
+}
+
+/* ****************************************
+* Build Classification Dropdown
+**************************************** */
+Util.buildClassificationList = async function (classification_id = null) {
+  const classifications = await invModel.getClassifications()
+
+  let data = '<option value="">Select a classification</option>'
+
+  classifications.rows.forEach(classification => {
+    data += `<option value="${classification.classification_id}"`
+
+    // add selected if it matches
+    if (
+      classification_id != null &&
+      classification.classification_id == classification_id
+    ) {
+      data += " selected"
+    }
+
+    data += `>${classification.classification_name}</option>`
+  })
+
+  return data
 }
 
 

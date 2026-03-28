@@ -49,7 +49,6 @@
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  color: var(--color-bg-primary);
   background: var(--color-text-primary);
   padding: 1rem;
 }
@@ -188,13 +187,14 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: x-large;
 }
 
 button:hover {
   background: #0056b3;
 }
 
-.login p {
+.login p{
   display: block;
   text-align: center;
   margin: 1rem;
@@ -219,4 +219,23 @@ input:required:invalid, input:focus:invalid {
  background-image: url(/images/valid.png);
  background-position: right top;
  background-repeat: no-repeat;
+ }
+
+ /** managment view **/
+ .managment-view, .addInventoryForm{
+  display: grid;
+  text-decoration: none;
+  list-style: none;
+  color: var(--color-text-primary);
+ }
+
+ .managment-view a{
+  color: var(--color-text-primary);
+ }
+
+.notice {
+  display: grid;
+  margin: 1rem;
+  padding: .5rem;
+  color: rgb(85, 1, 1);
  }

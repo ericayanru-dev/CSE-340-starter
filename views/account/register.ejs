@@ -13,4 +13,52 @@
 <% } %>
 <%# messages() %>
 <%- messages() %>
-<%- register %>
+<form id="registerForm" class="registerForm" action="/account/register" method="post">
+
+  <label for="firstname">First Name</label>
+  <input 
+    type="text" 
+    id="firstname" 
+    name="account_firstname" 
+    required 
+    value="<%= locals.account_firstname %>">
+
+  <label for="lastname">Last Name</label>
+  <input 
+    type="text" 
+    id="lastname" 
+    name="account_lastname" 
+    required
+    value="<%= locals.account_lastname %>">
+
+  <label for="email">Email Address</label>
+  <input 
+    type="email" 
+    id="email" 
+    name="account_email" 
+    required
+    value="<%= locals.account_email %>">
+
+  <label for="password">Password</label>
+  <input 
+    type="password" 
+    id="password" 
+    name="account_password" 
+    required
+    pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+    title="Must be at least 12 characters, include uppercase, lowercase, number, special character, and no spaces"
+  >
+
+  <button type="submit">Register</button>
+
+</form>
+
+<div class="registration-criterials">
+  <p>All inputs are required. Password must be:</p>
+  <ul>
+    <li>At least 12 characters long</li>
+    <li>Contain at least 1 capital letter</li>
+    <li>Contain at least 1 number</li>
+    <li>Contain at least 1 special character</li>
+  </ul>
+</div>
