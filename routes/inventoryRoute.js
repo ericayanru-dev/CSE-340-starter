@@ -9,9 +9,10 @@ const classificationValidate = require('../utilities/inventoryValidation')
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 router.get("/detail/:inventortyId", utilities.handleErrors(invController.buildByInventoryId))
 router.get("/error", utilities.handleErrors(invController.triggerError))
-router.get("/management", utilities.handleErrors(invController.buildManagement))
+router.get("/", utilities.handleErrors(invController.buildManagement))
 router.get("/addClassification", utilities.handleErrors(invController.buildAddClassification))
 router.get("/addInventory", utilities.handleErrors(invController.buildAddInventory))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 // Process the add Classification data
 router.post(
