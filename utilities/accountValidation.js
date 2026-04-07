@@ -115,5 +115,81 @@ validate.checkLoginData = async (req, res, next) => {
   next()
 }
 
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .notEmpty()
+      .withMessage("First name required"),
+
+    body("account_lastname")
+      .trim()
+      .notEmpty()
+      .withMessage("Last name required"),
+
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("Valid email required")
+      .custom(async (email, { req }) => {
+        const existing = await accountModel.getAccountByEmail(email)
+
+        // Allow same email for same user
+        if (existing && existing.account_id != req.body.account_id) {
+          throw new Error("Email already exists")
+        }
+      })
+  ]
+}
+
+validate.checkUpdateAccountData = async (req, res, next) => {
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+
+    return res.render("account/update-account", {
+      title: "Update Account",
+      nav,
+      errors,
+      account_id: req.body.account_id,
+      account_firstname: req.body.account_firstname,
+      account_lastname: req.body.account_lastname,
+      account_email: req.body.account_email,
+    })
+  }
+
+  next()
+}
+
+validate.passwordRules = () => {
+  return [
+    body("account_password")
+      .matches(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{12,}$/)
+      .withMessage("Password does not meet requirements")
+  ]
+}
+
+validate.checkPasswordData = async (req, res, next) => {
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+
+    const accountData = res.locals.accountData
+
+    return res.render("account/update-account", {
+      title: "Update Account",
+      nav,
+      errors,
+      account_id: req.body.account_id,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
+    })
+  }
+
+  next()
+}
 
 module.exports = validate

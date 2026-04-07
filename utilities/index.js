@@ -204,6 +204,24 @@ Util.checkJWTToken = (req, res, next) => {
  }
 
 /* ****************************************
+ *  Check Account Type (Authorization)
+ * ************************************ */
+Util.checkEmployeeOrAdmin = (req, res, next) => {
+  if (
+    res.locals.loggedin &&
+    (
+      res.locals.accountData.account_type === "Employee" ||
+      res.locals.accountData.account_type === "Admin"
+    )
+  ) {
+    next()
+  } else {
+    req.flash("notice", "Please log in with an authorized account.")
+    return res.redirect("/account/login")
+  }
+}
+
+/* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
  * General Error Handling

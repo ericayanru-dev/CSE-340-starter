@@ -47,6 +47,13 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser())
 app.use(utilities.checkJWTToken)
+app.use((req, res, next) => {
+  res.locals.loggedin = res.locals.loggedin || false
+  res.locals.account_firstname = res.locals.accountData
+    ? res.locals.accountData.account_firstname
+    : null
+  next()
+})
 
 
 /* ***********************

@@ -1,0 +1,88 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<%- messages() %>
+
+<!-- Error Messages -->
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<!-- ===================== -->
+<!-- ACCOUNT UPDATE FORM -->
+<!-- ===================== -->
+<h2>Update Account Information</h2>
+
+<form action="/account/update" method="post">
+
+  <!-- First Name -->
+  <label for="account_firstname">First Name</label>
+  <input
+    type="text"
+    name="account_firstname"
+    id="account_firstname"
+    required
+    value="<%= account_firstname %>">
+
+  <!-- Last Name -->
+  <label for="account_lastname">Last Name</label>
+  <input
+    type="text"
+    name="account_lastname"
+    id="account_lastname"
+    required
+    value="<%= account_lastname %>">
+
+  <!-- Email -->
+  <label for="account_email">Email</label>
+  <input
+    type="email"
+    name="account_email"
+    id="account_email"
+    required
+    value="<%= account_email %>">
+
+  <!-- Hidden ID -->
+  <input type="hidden" name="account_id" value="<%= account_id %>">
+
+  <button type="submit">Update Account</button>
+</form>
+
+<hr>
+
+<!-- ===================== -->
+<!-- PASSWORD CHANGE FORM -->
+<!-- ===================== -->
+<h2>Change Password</h2>
+
+<form action="/account/update-password" method="post">
+
+  <label for="account_password">New Password</label>
+  <input
+    type="password"
+    name="account_password"
+    id="account_password"
+    required
+    pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+  >
+<div class="notice">
+  <p>
+    Password must be at least 12 characters and include:
+  </p>
+  <ul>
+    <li>1 uppercase letter</li>
+    <li>1 number</li>
+    <li>1 special character</li>
+  </ul>
+</div>
+
+  <!-- Hidden ID -->
+  <input type="hidden" name="account_id" value="<%= account_id %>">
+
+  <button type="submit">Change Password</button>
+</form>
