@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const favoritesModel = require("../models/favorites-model")
 
 const invCont = {}
 
@@ -26,7 +27,13 @@ invCont.buildByInventoryId = async function (req, res, next) {
     const data = await invModel.getInventoryItemByInventoryID(inventorty_Id)
     console.log(data)
     const nav = await utilities.getNav()
-    const view = await utilities.buildItemDetailPage(data)
+
+    const account_id = res.locals.accountData?.account_id
+    let isFavorite = false
+    if (account_id) {
+      isFavorite = await favoritesModel.checkIfFavorite(account_id, inventorty_Id)
+    }
+    const view = await utilities.buildItemDetailPage(data, isFavorite)
     res.render("inventory/detail", {
       title: `${data.inv_year} ${data.inv_make} ${data.inv_model}`,
       nav,

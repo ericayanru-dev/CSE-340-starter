@@ -64,24 +64,42 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
-Util.buildItemDetailPage = async function (data) {
+Util.buildItemDetailPage = async function (data, isFavorite = false) {
   if (data) {
-    return`
-    <div class= vehicle-detail>
-    <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
-    
-    <article class="vehicle-info">
-    <h2>${data.inv_make} ${data.inv_model} Detail</h2>
-    <span class="detail-style"><strong>Price:</strong> $${Number(data.inv_price).toLocaleString()}</span>
-    <p><strong>Description:</strong> ${data.inv_description}</p>
-    <span class="detail-style"><strong>color:</strong> ${data.inv_color}</span>
-    <p><strong>Mileage:</strong> ${Number(data.inv_miles).toLocaleString()} miles</p>
-    </article>
+    return `
+    <div class="vehicle-detail">
+      <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
+      
+      <article class="vehicle-info">
+        <h2>${data.inv_make} ${data.inv_model} Detail</h2>
+        <span class="detail-style"><strong>Price:</strong> $${Number(data.inv_price).toLocaleString()}</span>
+        <p><strong>Description:</strong> ${data.inv_description}</p>
+        <span class="detail-style"><strong>Color:</strong> ${data.inv_color}</span>
+        <p><strong>Mileage:</strong> ${Number(data.inv_miles).toLocaleString()} miles</p>
+      </article>
+
+      ${
+        isFavorite
+          ? `
+        <!-- REMOVE FAVORITE -->
+        <form action="/account/favorite/remove" method="post">
+          <input type="hidden" name="inv_id" value="${data.inv_id}">
+          <button type="submit">❌ Remove from Favorites</button>
+        </form>
+      `
+          : `
+        <!-- ADD FAVORITE -->
+        <form action="/account/favorite" method="post">
+          <input type="hidden" name="inv_id" value="${data.inv_id}">
+          <button type="submit">❤️ Add to Favorites</button>
+        </form>
+      `
+      }
+
     </div>`
+  } else {
+    return '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
-  else { 
-    return'<p class="notice">Sorry, no matching vehicles could be found.</p>'
-  }  
 }
 
 Util.loginPage = async function () {

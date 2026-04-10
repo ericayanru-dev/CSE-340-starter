@@ -25,11 +25,16 @@
   text-decoration: none;
  }
 .top-header {
-  display: flex;
+
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
+}
+
+.logo {
+  display: flex;
+  justify-content: space-between;
 }
 
 #top-header .siteName a{
@@ -49,6 +54,11 @@
 }
 .loging-process li{
   padding: .5rem;
+}
+.favorites a{
+  display: inline;
+  justify-content: right;
+  text-align: right;
 }
 
 .nav-bar ul{

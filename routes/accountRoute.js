@@ -4,12 +4,14 @@ const router = new express.Router()
 const accountController = require("../controllers/accountController")
 const utilities = require("../utilities/index")
 const regValidate = require('../utilities/accountValidation')
+const favCont = require("../controllers/favorites-controller")
 
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
 router.get("/logout", utilities.handleErrors(accountController.logout))
 router.get("/update/:account_id", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdateView))
+router.get("/favorites", utilities.checkLogin, utilities.handleErrors(favCont.buildFavorites))
 
 // get registration details//
 router.post('/register',
@@ -39,6 +41,17 @@ router.post(
   regValidate.passwordRules(),
   regValidate.checkPasswordData,
   utilities.handleErrors(accountController.updatePassword)
+)
+
+router.post("/favorite",
+    utilities.checkLogin,
+  utilities.handleErrors(favCont.addFavorite)
+)
+
+router.post(
+  "/favorite/remove",
+  utilities.checkLogin,
+  utilities.handleErrors(favCont.removeFavorite)
 )
 
 module.exports = router;
